@@ -1,0 +1,3 @@
+public enum SHIP_STATUS {
+    UNDAMAGED, DAMAGED, SUNKEN
+}
