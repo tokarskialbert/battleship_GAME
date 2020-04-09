@@ -55,5 +55,10 @@ public class Ship implements ShipInterface {
     public void setShip_status(SHIP_STATUS ship_status) {
         this.ship_status = ship_status;
     }
+
+    @Override
+    public Set<Field> getFieldSet() {
+        return fieldSet;
+    }
 }
 

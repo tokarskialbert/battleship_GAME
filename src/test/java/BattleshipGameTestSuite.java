@@ -4,6 +4,20 @@ import org.junit.Test;
 public class BattleshipGameTestSuite {
 
     @Test
+    public void testCompareFields() {
+
+        //given
+        Field field1 = new Field(1,2);
+        Field field2 = new Field(1, 2);
+
+        //when
+        boolean validateResult = field1.equals(field2);
+
+        //then
+        Assert.assertTrue(validateResult);
+    }
+
+    @Test
     public void testDamageShip() {
 
         //given
@@ -90,5 +104,51 @@ public class BattleshipGameTestSuite {
 
         //then
         Assert.assertTrue(validateResult);
+    }
+
+    @Test
+    public void testCheckIfCorrectNumberOfFields() {
+
+        //given
+        GameConfigurator gameConfigurator = new GameConfigurator();
+        gameConfigurator.setTargetNumberOfFields(3);
+
+        Field[] field = new Field[3];
+            field[0] = new Field(1, 1);
+            field[1] = new Field(1, 2);
+            field[2] = new Field(1, 3);
+
+        //when
+        boolean validateResult = gameConfigurator.checkIfCorrectNumberOfFields(field);
+
+        //then
+        Assert.assertTrue(validateResult);
+    }
+
+    @Test
+    public void testCheckIfFieldIsAvailable() {
+
+        //given
+        GameConfigurator gameConfigurator = new GameConfigurator();
+        Player testPlayer = new User();
+
+        Field testField1 = new Field(2, 3);
+        Field testField2 = new Field(2, 4);
+        Field testField3 = new Field(2, 5);
+        ShipInterface testShip1 = new Ship(3, testField1, testField2, testField3);
+
+        Field testField4 = new Field(5, 5);
+        Field testField5 = new Field(5, 6);
+        Field testField6 = new Field(5, 7);
+        ShipInterface testShip2 = new Ship(2, testField4, testField5, testField6);
+
+        testPlayer.addShipToSet(testShip1);
+        testPlayer.addShipToSet(testShip2);
+
+        //when
+        boolean validateResult = gameConfigurator.checkIfFieldIsAvailable(new Field(5,6), testPlayer);
+
+        //then
+        Assert.assertFalse(validateResult);
     }
 }

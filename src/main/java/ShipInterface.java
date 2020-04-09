@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Set;
 
 public interface ShipInterface {
 
@@ -8,4 +9,5 @@ public interface ShipInterface {
     SHIP_STATUS getShip_status();
     void setShip_status(SHIP_STATUS ship_status);
     void addFieldToSet(Field[] fields);
+    public Set<Field> getFieldSet();
 }
