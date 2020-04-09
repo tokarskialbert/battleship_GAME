@@ -47,4 +47,48 @@ public class BattleshipGameTestSuite {
         //then
         Assert.assertFalse(ship.equals(ship2));
     }
+
+    @Test
+    public void testCheckIfShipCanBeAddedToSet() {
+
+        //given
+        GameConfigurator gameConfigurator = new GameConfigurator();
+        Player testPlayer = new User();
+        Field testField = new Field(2, 3);
+        ShipInterface testShip = new Ship(1, testField);
+        testPlayer.addShipToSet(testShip);
+
+        //when
+        gameConfigurator.setTargetNumberOfShips(1);
+        boolean validateResult = gameConfigurator.checkIfShipCanBeAddedToSet(testPlayer);
+
+        //then
+        Assert.assertFalse(validateResult);
+    }
+
+    @Test
+    public void testCheckIfShipCanBeAddedToSet2() {
+
+        //given
+        GameConfigurator gameConfigurator = new GameConfigurator();
+        Player testPlayer = new User();
+
+        Field testField1 = new Field(2, 3);
+        Field testField2 = new Field(2, 4);
+        ShipInterface testShip1 = new Ship(2, testField1, testField2);
+
+        Field testField3 = new Field(5, 5);
+        Field testField4 = new Field(5, 6);
+        ShipInterface testShip2 = new Ship(2, testField3, testField4);
+
+        testPlayer.addShipToSet(testShip1);
+        testPlayer.addShipToSet(testShip2);
+
+        //when
+        gameConfigurator.setTargetNumberOfShips(3);
+        boolean validateResult = gameConfigurator.checkIfShipCanBeAddedToSet(testPlayer);
+
+        //then
+        Assert.assertTrue(validateResult);
+    }
 }

@@ -10,4 +10,9 @@ public class User implements Player {
 
         this.userShipSet.add(shipInterface);
     }
+
+    @Override
+    public Set<ShipInterface> getShipSet() {
+        return this.userShipSet;
+    }
 }

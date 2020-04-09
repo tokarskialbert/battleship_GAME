@@ -10,4 +10,9 @@ public class Computer implements Player {
 
         this.computerShipSet.add(shipInterface);
     }
+
+    @Override
+    public Set<ShipInterface> getShipSet() {
+        return this.computerShipSet;
+    }
 }
