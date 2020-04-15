@@ -146,7 +146,35 @@ public class BattleshipGameTestSuite {
         testPlayer.addShipToSet(testShip2);
 
         //when
-        boolean validateResult = gameConfigurator.checkIfFieldIsAvailable(new Field(5,6), testPlayer);
+        boolean validateResult = gameConfigurator.checkIfThereIsNoShipOnField(new Field(5,6), testPlayer);
+
+        //then
+        Assert.assertFalse(validateResult);
+    }
+
+    @Test
+    public void testCheckIfFieldsAroundTheShipAreFree1() {
+
+        //given
+        GameConfigurator gameConfigurator = new GameConfigurator();
+        Player testPlayer = new User();
+        gameConfigurator.setTargetNumberOfShips(2);
+
+        Field testField1 = new Field(2, 5);
+        Field testField2 = new Field(3, 5);
+        Field testField3 = new Field(4, 5);
+        Ship testShip1 = new Ship(3, testField1, testField2, testField3);
+        testShip1.setShipOrientation(ORIENTATION.VERTICAL);
+        testPlayer.addShipToSet(testShip1);
+
+        Field testField4 = new Field(5, 4);
+        Field testField5 = new Field(6, 6);
+        Field testField6 = new Field(7, 6);
+        Ship testShip2 = new Ship(3, testField4, testField5, testField6);
+        testShip2.setShipOrientation(ORIENTATION.VERTICAL);
+
+        //when
+        boolean validateResult = gameConfigurator.checkIfFieldsAroundTheShipAreFree(testShip2, testPlayer);
 
         //then
         Assert.assertFalse(validateResult);

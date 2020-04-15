@@ -1,24 +1,24 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Ship implements ShipInterface {
 
+    private ORIENTATION shipOrientation;
     private SHIP_STATUS ship_status = SHIP_STATUS.UNDAMAGED;
     private int mastNumber;
-    private Set<Field> fieldSet = new HashSet<>();
+    private List<Field> fieldList = new ArrayList<Field>();
 
     public Ship(int mastNumber, Field... fields) {
 
         this.mastNumber = mastNumber;
-        addFieldToSet(fields);
+        addFieldToList(fields);
     }
 
     @Override
-    public void addFieldToSet(Field[] fields) {
+    public void addFieldToList(Field[] fields) {
 
         for(Field field : fields) {
 
-            this.fieldSet.add(field);
+            this.fieldList.add(field);
         }
     }
 
@@ -57,8 +57,17 @@ public class Ship implements ShipInterface {
     }
 
     @Override
-    public Set<Field> getFieldSet() {
-        return fieldSet;
+    public List<Field> getFieldList() {
+        return fieldList;
+    }
+
+    @Override
+    public void setShipOrientation(ORIENTATION shipOrientation) {
+        this.shipOrientation = shipOrientation;
+    }
+
+    public ORIENTATION getShipOrientation() {
+        return shipOrientation;
     }
 }
 

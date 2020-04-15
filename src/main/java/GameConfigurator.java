@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -6,6 +7,7 @@ public class GameConfigurator {
     //ustawiane przez checkbox
     private int targetNumberOfShips;
     private int targetNumberOfFields;
+    private Set<Field> bannedFields = new HashSet<>();
 
     public void setTargetNumberOfShips(int targetNumberOfShips) {
         this.targetNumberOfShips = targetNumberOfShips;
@@ -13,7 +15,7 @@ public class GameConfigurator {
 
     public boolean checkIfShipCanBeAddedToSet(Player player) {
 
-        if(player != null) {
+        if (player != null) {
 
             Set<ShipInterface> shipSet = player.getShipSet().stream()
                     .filter(shipInterface -> shipInterface.getMastNumber() == targetNumberOfShips)
@@ -38,7 +40,7 @@ public class GameConfigurator {
 
     public boolean checkIfCorrectNumberOfFields(Field[] fields) {
 
-        if(fields.length == targetNumberOfFields) {
+        if (fields.length == targetNumberOfFields) {
 
             return true;
         } else {
@@ -48,10 +50,44 @@ public class GameConfigurator {
 
     }
 
-    public boolean checkIfFieldIsAvailable(Field field, Player player) {
+    public boolean checkIfThereIsNoShipOnField(Field field, Player player) {
 
         return player.getShipSet().stream()
-                .flatMap(shipInterface -> shipInterface.getFieldSet().stream())
+                .flatMap(shipInterface -> shipInterface.getFieldList().stream())
                 .noneMatch(i -> i.equals(field));
+    }
+
+    public boolean checkIfFieldsAroundTheShipAreFree(Ship ship, Player player) {
+
+        boolean shipCanBeAddedToSet = true;
+
+
+        int rowBannedField = ship.getFieldList().get(0).getRow() - 1;
+        int columnBannedField = ship.getFieldList().get(0).getColumn() - 1;
+        bannedFields.add(new Field(rowBannedField, columnBannedField));
+
+        rowBannedField = ship.getFieldList().get(0).getRow() - 1;
+        columnBannedField = ship.getFieldList().get(0).getColumn();
+        bannedFields.add(new Field(rowBannedField, columnBannedField));
+
+        rowBannedField = ship.getFieldList().get(0).getRow() - 1;
+        columnBannedField = ship.getFieldList().get(0).getColumn() + 1;
+        bannedFields.add(new Field(rowBannedField, columnBannedField));
+
+        rowBannedField = ship.getFieldList().get(0).getRow();
+        columnBannedField = ship.getFieldList().get(0).getColumn() - 1;
+        bannedFields.add(new Field(rowBannedField, columnBannedField));
+
+        rowBannedField = ship.getFieldList().get(0).getRow();
+        columnBannedField = ship.getFieldList().get(0).getColumn() + 1;
+        bannedFields.add(new Field(rowBannedField, columnBannedField));
+
+        for (Field bannedField : bannedFields) {
+            if (!(checkIfThereIsNoShipOnField(bannedField, player))) {
+
+                shipCanBeAddedToSet = false;
+            }
+        }
+        return shipCanBeAddedToSet;
     }
 }
