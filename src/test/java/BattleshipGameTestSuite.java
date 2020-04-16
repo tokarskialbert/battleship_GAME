@@ -1,6 +1,8 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Set;
+
 public class BattleshipGameTestSuite {
 
     @Test
@@ -405,7 +407,6 @@ public class BattleshipGameTestSuite {
     public void testCheckIfPlayerLost() {
 
         //given
-        GameConfigurator gameConfigurator = new GameConfigurator();
         GameStatusVerifier gameStatusVerifier = new GameStatusVerifier();
 
         Field testField4 = new Field(1, 1);
@@ -428,5 +429,48 @@ public class BattleshipGameTestSuite {
 
         //then
         Assert.assertFalse(validateStatus);
+    }
+
+    @Test
+    public void testCheckIfThereIsShipOnFiled() {
+
+        //given
+        Game game = new Game();
+        Field testField4 = new Field(1, 1);
+        Field testField5 = new Field(1, 2);
+        Field testField6 = new Field(1, 3);
+        Field testField7 = new Field(1, 4);
+        Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
+
+        Player testPlayer = new Computer();
+            testPlayer.addShipToSet(testShip2);
+
+        //when
+        boolean validateStatus = game.checkIfThereIsShipOnFiled(testPlayer, new Field(1,1));
+
+        //then
+        Assert.assertTrue(validateStatus);
+    }
+
+    @Test
+    public void testAddMissedFieldToSet() {
+
+        //given
+        Game game = new Game();
+        Field testField4 = new Field(1, 1);
+        Field testField5 = new Field(1, 2);
+        Field testField6 = new Field(1, 3);
+        Field testField7 = new Field(1, 4);
+        Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
+
+        Player testPlayer = new Computer();
+        testPlayer.addShipToSet(testShip2);
+
+        //when
+        game.addMissedFieldToSet(testPlayer, new Field(3,3));
+        Set testSet = testPlayer.getMissedFieldsByOpponentSet();
+
+        //then
+        Assert.assertTrue(testSet.size() == 1);
     }
 }

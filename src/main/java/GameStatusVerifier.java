@@ -15,3 +15,5 @@ public class GameStatusVerifier {
         }
     }
 }
+
+//tu jeszcze czyj jest ruch
