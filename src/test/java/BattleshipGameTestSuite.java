@@ -320,4 +320,44 @@ public class BattleshipGameTestSuite {
         //then
         Assert.assertFalse(validateResult);
     }
+
+    @Test
+    public void testCheckIfShipIsStraightVertical() {
+
+        //given
+        GameConfigurator gameConfigurator = new GameConfigurator();
+
+        Field testField4 = new Field(1, 1);
+        Field testField5 = new Field(2, 1);
+        Field testField6 = new Field(3, 2);
+        Field testField7 = new Field(4, 1);
+        Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
+
+
+        //when
+        boolean validateResult = gameConfigurator.checkIfShipIsStraight(testShip2);
+
+        //then
+        Assert.assertFalse(validateResult);
+    }
+
+    @Test
+    public void testCheckIfShipIsStraightHorizontal() {
+
+        //given
+        GameConfigurator gameConfigurator = new GameConfigurator();
+
+        Field testField4 = new Field(2, 1);
+        Field testField5 = new Field(1, 2);
+        Field testField6 = new Field(1, 3);
+        Field testField7 = new Field(1, 4);
+        Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
+
+
+        //when
+        boolean validateResult = gameConfigurator.checkIfShipIsStraight(testShip2);
+
+        //then
+        Assert.assertFalse(validateResult);
+    }
 }

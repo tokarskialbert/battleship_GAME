@@ -198,4 +198,24 @@ public class GameConfigurator {
         }
         return shipCanBeAddedToSet;
     }
+
+    public boolean checkIfShipIsStraight(Ship ship) {
+
+        int column = ship.getFieldList().get(0).getColumn();
+        int row = ship.getFieldList().get(0).getRow();
+
+        boolean verticalShip = ship.getFieldList().stream()
+                .allMatch(i -> i.getColumn() == column);
+
+        boolean horizontalShip = ship.getFieldList().stream()
+                .allMatch(i -> i.getRow() == row);
+
+        if (verticalShip || horizontalShip) {
+
+            return true;
+        } else {
+
+            return false;
+        }
+    }
 }
