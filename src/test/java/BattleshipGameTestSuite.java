@@ -40,7 +40,7 @@ public class BattleshipGameTestSuite {
         ship.damageShip();
 
         //then
-        Assert.assertTrue(ship.getShip_status().equals(SHIP_STATUS.SUNKEN));
+        Assert.assertTrue(ship.getShipStatus().equals(SHIP_STATUS.SUNKEN));
 
     }
 
@@ -165,14 +165,14 @@ public class BattleshipGameTestSuite {
         Field testField2 = new Field(3, 5);
         Field testField3 = new Field(4, 5);
         Ship testShip1 = new Ship(3, testField1, testField2, testField3);
-        testShip1.setShipOrientation(ORIENTATION.VERTICAL);
+        testShip1.setShipOrientation();
         testPlayer.addShipToSet(testShip1);
 
         Field testField4 = new Field(5, 4);
         Field testField5 = new Field(6, 6);
         Field testField6 = new Field(7, 6);
         Ship testShip2 = new Ship(3, testField4, testField5, testField6);
-        testShip2.setShipOrientation(ORIENTATION.VERTICAL);
+        testShip2.setShipOrientation();
 
         //when
         boolean validateResult = gameConfigurator.checkIfFieldsAroundTheShipAreFreeVERTICAL(testShip2, testPlayer);
@@ -192,7 +192,7 @@ public class BattleshipGameTestSuite {
 
         Field testField1 = new Field(4, 4);
         Ship testShip1 = new Ship(1, testField1);
-        testShip1.setShipOrientation(ORIENTATION.HORIZONTAL);
+        testShip1.setShipOrientation();
         testPlayer.addShipToSet(testShip1);
 
         Field testField4 = new Field(2, 5);
@@ -200,7 +200,7 @@ public class BattleshipGameTestSuite {
         Field testField6 = new Field(4, 5);
         Field testField7 = new Field(5, 5);
         Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
-        testShip2.setShipOrientation(ORIENTATION.VERTICAL);
+        testShip2.setShipOrientation();
 
         //when
         boolean validateResult = gameConfigurator.checkIfFieldsAroundTheShipAreFreeVERTICAL(testShip2, testPlayer);
@@ -220,7 +220,7 @@ public class BattleshipGameTestSuite {
 
         Field testField1 = new Field(5, 4);
         Ship testShip1 = new Ship(1, testField1);
-        testShip1.setShipOrientation(ORIENTATION.HORIZONTAL);
+        testShip1.setShipOrientation();
         testPlayer.addShipToSet(testShip1);
 
         Field testField4 = new Field(2, 5);
@@ -228,7 +228,7 @@ public class BattleshipGameTestSuite {
         Field testField6 = new Field(4, 5);
         Field testField7 = new Field(5, 5);
         Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
-        testShip2.setShipOrientation(ORIENTATION.VERTICAL);
+        testShip2.setShipOrientation();
 
         //when
         boolean validateResult = gameConfigurator.checkIfFieldsAroundTheShipAreFreeVERTICAL(testShip2, testPlayer);
@@ -248,7 +248,7 @@ public class BattleshipGameTestSuite {
 
         Field testField1 = new Field(5, 2);
         Ship testShip1 = new Ship(1, testField1);
-        testShip1.setShipOrientation(ORIENTATION.HORIZONTAL);
+        testShip1.setShipOrientation();
         testPlayer.addShipToSet(testShip1);
 
         Field testField4 = new Field(6, 3);
@@ -256,7 +256,7 @@ public class BattleshipGameTestSuite {
         Field testField6 = new Field(6, 5);
         Field testField7 = new Field(6, 6);
         Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
-        testShip2.setShipOrientation(ORIENTATION.HORIZONTAL);
+        testShip2.setShipOrientation();
 
         //when
         boolean validateResult = gameConfigurator.checkIfFieldsAroundTheShipAreFreeHORIZONTAL(testShip2, testPlayer);
@@ -276,7 +276,7 @@ public class BattleshipGameTestSuite {
 
         Field testField1 = new Field(5, 4);
         Ship testShip1 = new Ship(1, testField1);
-        testShip1.setShipOrientation(ORIENTATION.HORIZONTAL);
+        testShip1.setShipOrientation();
         testPlayer.addShipToSet(testShip1);
 
         Field testField4 = new Field(6, 2);
@@ -284,7 +284,7 @@ public class BattleshipGameTestSuite {
         Field testField6 = new Field(6, 4);
         Field testField7 = new Field(6, 5);
         Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
-        testShip2.setShipOrientation(ORIENTATION.HORIZONTAL);
+        testShip2.setShipOrientation();
 
         //when
         boolean validateResult = gameConfigurator.checkIfFieldsAroundTheShipAreFreeHORIZONTAL(testShip2, testPlayer);
@@ -304,7 +304,7 @@ public class BattleshipGameTestSuite {
 
         Field testField1 = new Field(5, 4);
         Ship testShip1 = new Ship(1, testField1);
-        testShip1.setShipOrientation(ORIENTATION.HORIZONTAL);
+        testShip1.setShipOrientation();
         testPlayer.addShipToSet(testShip1);
 
         Field testField4 = new Field(6, 1);
@@ -312,7 +312,7 @@ public class BattleshipGameTestSuite {
         Field testField6 = new Field(6, 3);
         Field testField7 = new Field(6, 4);
         Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
-        testShip2.setShipOrientation(ORIENTATION.HORIZONTAL);
+        testShip2.setShipOrientation();
 
         //when
         boolean validateResult = gameConfigurator.checkIfFieldsAroundTheShipAreFreeHORIZONTAL(testShip2, testPlayer);
@@ -359,5 +359,74 @@ public class BattleshipGameTestSuite {
 
         //then
         Assert.assertFalse(validateResult);
+    }
+
+    @Test
+    public void testCheckShipOrientationVERTICAL() {
+
+        //given
+        GameConfigurator gameConfigurator = new GameConfigurator();
+
+        Field testField4 = new Field(1, 1);
+        Field testField5 = new Field(2, 1);
+        Field testField6 = new Field(3, 1);
+        Field testField7 = new Field(4, 1);
+        Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
+
+        //when
+        testShip2.setShipOrientation();
+        ORIENTATION testOrientation = testShip2.getShipOrientation();
+
+        //then
+        Assert.assertTrue(testOrientation == ORIENTATION.VERTICAL);
+    }
+
+    @Test
+    public void testCheckShipOrientationHORIZONTAL() {
+
+        //given
+        GameConfigurator gameConfigurator = new GameConfigurator();
+
+        Field testField4 = new Field(1, 1);
+        Field testField5 = new Field(1, 2);
+        Field testField6 = new Field(1, 3);
+        Field testField7 = new Field(1, 4);
+        Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
+
+        //when
+        testShip2.setShipOrientation();
+        ORIENTATION testOrientation = testShip2.getShipOrientation();
+
+        //then
+        Assert.assertTrue(testOrientation == ORIENTATION.HORIZONTAL);
+    }
+
+    @Test
+    public void testCheckIfPlayerLost() {
+
+        //given
+        GameConfigurator gameConfigurator = new GameConfigurator();
+        GameStatusVerifier gameStatusVerifier = new GameStatusVerifier();
+
+        Field testField4 = new Field(1, 1);
+        Field testField5 = new Field(1, 2);
+        Field testField6 = new Field(1, 3);
+        Field testField7 = new Field(1, 4);
+        Ship testShip2 = new Ship(4, testField4, testField5, testField6, testField7);
+            testShip2.setShipStatus(SHIP_STATUS.SUNKEN);
+
+        Field testField1 = new Field(6, 6);
+        Ship testShip1 = new Ship(1, testField1);
+            testShip1.setShipStatus(SHIP_STATUS.DAMAGED);
+
+        Player testPlayer = new Computer();
+            testPlayer.addShipToSet(testShip2);
+            testPlayer.addShipToSet(testShip1);
+
+        //when
+        boolean validateStatus = gameStatusVerifier.checkIfPlayerLost(testPlayer);
+
+        //then
+        Assert.assertFalse(validateStatus);
     }
 }

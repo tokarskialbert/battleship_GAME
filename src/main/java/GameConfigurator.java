@@ -4,9 +4,10 @@ import java.util.stream.Collectors;
 
 public class GameConfigurator {
 
-    //ustawiane przez checkbox
+    //oba ustawiane przez checkbox
     private int targetNumberOfShips;
     private int targetNumberOfFields;
+
     private Set<Field> bannedFields = new HashSet<>();
 
     public void setTargetNumberOfShips(int targetNumberOfShips) {

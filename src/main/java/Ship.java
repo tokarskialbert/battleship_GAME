@@ -47,12 +47,12 @@ public class Ship implements ShipInterface {
     }
 
     @Override
-    public SHIP_STATUS getShip_status() {
+    public SHIP_STATUS getShipStatus() {
         return ship_status;
     }
 
     @Override
-    public void setShip_status(SHIP_STATUS ship_status) {
+    public void setShipStatus(SHIP_STATUS ship_status) {
         this.ship_status = ship_status;
     }
 
@@ -62,8 +62,24 @@ public class Ship implements ShipInterface {
     }
 
     @Override
-    public void setShipOrientation(ORIENTATION shipOrientation) {
-        this.shipOrientation = shipOrientation;
+    public void setShipOrientation() {
+
+        int column = this.fieldList.get(0).getColumn();
+        int row = this.fieldList.get(0).getRow();
+
+        boolean verticalShip = this.fieldList.stream()
+                .allMatch(i -> i.getColumn() == column);
+
+        boolean horizontalShip = this.fieldList.stream()
+                .allMatch(i -> i.getRow() == row);
+
+        if(verticalShip) {
+
+            shipOrientation = ORIENTATION.VERTICAL;
+        } else {
+
+            shipOrientation = ORIENTATION.HORIZONTAL;
+        }
     }
 
     public ORIENTATION getShipOrientation() {
